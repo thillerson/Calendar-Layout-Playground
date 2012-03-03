@@ -10,6 +10,11 @@
       this.end = this.eventObject.end;
     }
 
+    CalendarEvent.prototype.collidesWith = function(another) {
+      var _ref, _ref2;
+      return ((this.start <= (_ref = another.start) && _ref <= this.end)) || ((this.start <= (_ref2 = another.end) && _ref2 <= this.end));
+    };
+
     return CalendarEvent;
 
   })();

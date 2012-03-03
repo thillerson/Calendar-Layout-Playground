@@ -5,6 +5,9 @@ class CalendarEvent
     @start = @eventObject.start
     @end = @eventObject.end
 
+  collidesWith: (another) ->
+    (@start <= another.start <= @end) or (@start <= another.end <= @end)
+
 window.CalendarEvent = CalendarEvent
 
 window.layOutDay = (events) ->

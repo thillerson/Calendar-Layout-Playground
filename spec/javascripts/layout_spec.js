@@ -5,7 +5,7 @@
       it("should exist", function() {
         return expect(CalendarEvent).toBeDefined();
       });
-      return it("should accept an event object as defined in the puzzle instructions", function() {
+      it("should accept an event object as defined in the puzzle instructions", function() {
         var calendarEvent;
         calendarEvent = new CalendarEvent({
           id: 1,
@@ -15,6 +15,28 @@
         expect(calendarEvent.id).toEqual(1);
         expect(calendarEvent.start).toEqual(60);
         return expect(calendarEvent.end).toEqual(120);
+      });
+      return it("should know when it collides with another calendar event", function() {
+        var nineToEleven, tenToNoon, thirteenToFifteen;
+        nineToEleven = new CalendarEvent({
+          id: 1,
+          start: 0,
+          end: 120
+        });
+        tenToNoon = new CalendarEvent({
+          id: 2,
+          start: 60,
+          end: 180
+        });
+        thirteenToFifteen = new CalendarEvent({
+          id: 2,
+          start: 240,
+          end: 360
+        });
+        expect(nineToEleven.collidesWith(tenToNoon)).toBeTruthy();
+        expect(tenToNoon.collidesWith(nineToEleven)).toBeTruthy();
+        expect(thirteenToFifteen.collidesWith(nineToEleven)).toBeFalsy();
+        return expect(thirteenToFifteen.collidesWith(tenToNoon)).toBeFalsy();
       });
     });
     return describe("layOutDay", function() {
