@@ -21,4 +21,6 @@
     return event.left = 0;
   };
 
+  window.detectCollisions = function() {};
+
 }).call(this);

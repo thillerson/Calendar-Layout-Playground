@@ -8,3 +8,5 @@ window.setTopFor = (event) ->
 
 window.setLeftFor = (event) ->
   event.left = 0
+
+window.detectCollisions = ->

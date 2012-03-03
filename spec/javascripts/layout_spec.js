@@ -20,8 +20,15 @@
         }
       ];
     });
+    describe("detectCollisions", function() {
+      return it("should be a function", function() {
+        expect(detectCollisions).toBeDefined();
+        return expect(detectCollisions instanceof Function).toBeTruthy();
+      });
+    });
     it("should be a function", function() {
-      return expect(layOutDay).toBeDefined();
+      expect(layOutDay).toBeDefined();
+      return expect(layOutDay instanceof Function).toBeTruthy();
     });
     it("should return an array", function() {
       return expect(layOutDay([]) instanceof Array).toBeTruthy();
