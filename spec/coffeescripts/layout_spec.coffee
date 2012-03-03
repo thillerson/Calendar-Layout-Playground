@@ -17,3 +17,7 @@ describe "layOutDay", ->
 
   it "should return as many events as it was given", ->
     expect( window.layOutDay(events).length ).toEqual events.length
+
+  it "should return events with left and top set in addition to id, start, and end", ->
+    expect(event.top).toBeDefined() for event in window.layOutDay(events)
+    expect(event.left).toBeDefined() for event in window.layOutDay(events)
