@@ -3,7 +3,12 @@
 
   CalendarEvent = (function() {
 
-    function CalendarEvent() {}
+    function CalendarEvent(eventObject) {
+      this.eventObject = eventObject;
+      this.id = this.eventObject.id;
+      this.start = this.eventObject.start;
+      this.end = this.eventObject.end;
+    }
 
     return CalendarEvent;
 

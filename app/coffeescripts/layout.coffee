@@ -1,6 +1,9 @@
 class CalendarEvent
 
-
+  constructor: (@eventObject) ->
+    @id = @eventObject.id
+    @start = @eventObject.start
+    @end = @eventObject.end
 
 window.CalendarEvent = CalendarEvent
 

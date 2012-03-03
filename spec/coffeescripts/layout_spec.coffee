@@ -4,6 +4,12 @@ describe "layout problem", ->
     it "should exist", ->
       expect(CalendarEvent).toBeDefined()
 
+    it "should accept an event object as defined in the puzzle instructions", ->
+      calendarEvent = new CalendarEvent( id : 1, start : 60, end : 120 )
+      expect(calendarEvent.id).toEqual 1
+      expect(calendarEvent.start).toEqual 60
+      expect(calendarEvent.end).toEqual 120
+
   describe "layOutDay", ->
 
     events = null
