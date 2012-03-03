@@ -19,6 +19,7 @@ window.CalendarEvent = CalendarEvent
 window.layOutDay = (events) ->
   window.setTopFor event for event in events
   window.setLeftFor event for event in events
+  window.setWidthFor event for event in events
   events
 
 window.setTopFor = (event) ->
@@ -26,3 +27,6 @@ window.setTopFor = (event) ->
 
 window.setLeftFor = (event) ->
   event.left = 0
+
+window.setWidthFor = (event) ->
+  event.width = 600

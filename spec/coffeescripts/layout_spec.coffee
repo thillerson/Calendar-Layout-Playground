@@ -60,10 +60,11 @@ describe "layout problem", ->
     it "should return as many events as it was given", ->
       expect( layOutDay(events).length ).toEqual events.length
 
-    it "should return events with left and top set in addition to id, start, and end", ->
+    it "should return events with width, left, and top set in addition to id, start, and end", ->
       expect(event.top).toBeDefined() for event in layOutDay(events)
       expect(event.top).toEqual(event.start) for event in layOutDay(events)
       expect(event.left).toBeDefined() for event in layOutDay(events)
+      expect(event.width).toBeDefined() for event in layOutDay(events)
 
 
 
