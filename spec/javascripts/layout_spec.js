@@ -21,9 +21,12 @@
       ];
     });
     describe("detectCollisions", function() {
-      return it("should be a function", function() {
+      it("should be a function", function() {
         expect(detectCollisions).toBeDefined();
         return expect(detectCollisions instanceof Function).toBeTruthy();
+      });
+      return it("should return an array", function() {
+        return expect(detectCollisions([]) instanceof Array).toBeTruthy();
       });
     });
     it("should be a function", function() {

@@ -21,6 +21,8 @@
     return event.left = 0;
   };
 
-  window.detectCollisions = function() {};
+  window.detectCollisions = function(events) {
+    return [];
+  };
 
 }).call(this);

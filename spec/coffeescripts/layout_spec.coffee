@@ -15,6 +15,9 @@ describe "layOutDay", ->
       expect( detectCollisions ).toBeDefined()
       expect( detectCollisions instanceof Function ).toBeTruthy()
 
+    it "should return an array", ->
+      expect( detectCollisions([]) instanceof Array ).toBeTruthy()
+
   it "should be a function", ->
     expect( layOutDay ).toBeDefined()
     expect( layOutDay instanceof Function ).toBeTruthy()
