@@ -43,9 +43,13 @@
         expect(thirteenToFifteen.collidesWith(nineToEleven)).toBeFalsy();
         return expect(thirteenToFifteen.collidesWith(tenToNoon)).toBeFalsy();
       });
-      return it("should know when it starts before another event", function() {
+      it("should know when it starts before another event", function() {
         expect(nineToEleven.startsBefore(tenToNoon)).toBeTruthy();
         return expect(tenToNoon.startsBefore(nineToEleven)).toBeFalsy();
+      });
+      return it("should know when it ends after another event", function() {
+        expect(nineToEleven.endsAfter(tenToNoon)).toBeFalsy();
+        return expect(tenToNoon.endsAfter(nineToEleven)).toBeTruthy();
       });
     });
     return describe("layOutDay", function() {

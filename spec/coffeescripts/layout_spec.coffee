@@ -30,6 +30,10 @@ describe "layout problem", ->
       expect( nineToEleven.startsBefore tenToNoon ).toBeTruthy()
       expect( tenToNoon.startsBefore nineToEleven ).toBeFalsy()
 
+    it "should know when it ends after another event", ->
+      expect( nineToEleven.endsAfter tenToNoon ).toBeFalsy()
+      expect( tenToNoon.endsAfter nineToEleven ).toBeTruthy()
+
   describe "layOutDay", ->
 
     events = null

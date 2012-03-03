@@ -11,6 +11,9 @@ class CalendarEvent
   startsBefore: (another) ->
     @start < another.start
 
+  endsAfter: (another) ->
+    @end > another.end
+
 window.CalendarEvent = CalendarEvent
 
 window.layOutDay = (events) ->

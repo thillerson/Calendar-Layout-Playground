@@ -19,6 +19,10 @@
       return this.start < another.start;
     };
 
+    CalendarEvent.prototype.endsAfter = function(another) {
+      return this.end > another.end;
+    };
+
     return CalendarEvent;
 
   })();
