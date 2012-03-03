@@ -1,28 +1,36 @@
 (function() {
 
   describe("layout problem", function() {
+    var events, nineToEleven, nineToElevenObject, tenToNoon, tenToNoonObject, thirteenToFifteen, thirteenToFifteenObject;
+    events = null;
+    nineToElevenObject = null;
+    tenToNoonObject = null;
+    thirteenToFifteenObject = null;
+    nineToEleven = null;
+    tenToNoon = null;
+    thirteenToFifteen = null;
+    beforeEach(function() {
+      nineToElevenObject = {
+        id: 1,
+        start: 60,
+        end: 120
+      };
+      tenToNoonObject = {
+        id: 2,
+        start: 100,
+        end: 240
+      };
+      thirteenToFifteenObject = {
+        id: 3,
+        start: 700,
+        end: 720
+      };
+      events = [nineToElevenObject, tenToNoonObject, thirteenToFifteenObject];
+      nineToEleven = new CalendarEvent(nineToElevenObject);
+      tenToNoon = new CalendarEvent(tenToNoonObject);
+      return thirteenToFifteen = new CalendarEvent(thirteenToFifteenObject);
+    });
     describe("CalendarEvent", function() {
-      var nineToEleven, tenToNoon, thirteenToFifteen;
-      nineToEleven = null;
-      tenToNoon = null;
-      thirteenToFifteen = null;
-      beforeEach(function() {
-        nineToEleven = new CalendarEvent({
-          id: 1,
-          start: 0,
-          end: 120
-        });
-        tenToNoon = new CalendarEvent({
-          id: 2,
-          start: 60,
-          end: 180
-        });
-        return thirteenToFifteen = new CalendarEvent({
-          id: 2,
-          start: 240,
-          end: 360
-        });
-      });
       it("should exist", function() {
         return expect(CalendarEvent).toBeDefined();
       });
@@ -53,25 +61,6 @@
       });
     });
     return describe("layOutDay", function() {
-      var events;
-      events = null;
-      beforeEach(function() {
-        return events = [
-          {
-            id: 1,
-            start: 60,
-            end: 120
-          }, {
-            id: 2,
-            start: 100,
-            end: 240
-          }, {
-            id: 3,
-            start: 700,
-            end: 720
-          }
-        ];
-      });
       it("should be a function", function() {
         expect(layOutDay).toBeDefined();
         return expect(layOutDay instanceof Function).toBeTruthy();
