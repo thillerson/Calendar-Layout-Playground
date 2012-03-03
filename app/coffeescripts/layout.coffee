@@ -5,6 +5,7 @@ class CalendarEvent
     @start = @eventObject.start
     @end = @eventObject.end
     @top = @start
+    @collisions = []
 
   collidesWith: (another) ->
     return false if another == @
@@ -20,19 +21,19 @@ window.CalendarEvent = CalendarEvent
 
 window.layOutDay = (events) ->
   calendarEvents = (new CalendarEvent(event) for event in events)
-  eventMap = eventMapFor calendarEvents
+  eventMap = mappedEventListFor calendarEvents
   calendarEvents
 
-# eventMapFor returns a hash where the keys
+# mappedEventListFor returns a hash where the keys
 # should be all the left anchored calendar events
-window.eventMapFor = (calendarEvents) ->
-  eventMap = {}
+window.mappedEventListFor = (calendarEvents) ->
+  eventMap = []
   for calendarEvent in calendarEvents
-    do (calendarEvent) ->
+    do (calendarEvent, eventMap) ->
       collisions = collisionsFor calendarEvent, calendarEvents
       if ( collisions.length == 0 )
         calendarEvent.width = 600
-        eventMap[calendarEvent]
+        eventMap.push calendarEvent
 
   eventMap
 

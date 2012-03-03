@@ -9,6 +9,7 @@
       this.start = this.eventObject.start;
       this.end = this.eventObject.end;
       this.top = this.start;
+      this.collisions = [];
     }
 
     CalendarEvent.prototype.collidesWith = function(another) {
@@ -42,24 +43,24 @@
       }
       return _results;
     })();
-    eventMap = eventMapFor(calendarEvents);
+    eventMap = mappedEventListFor(calendarEvents);
     return calendarEvents;
   };
 
-  window.eventMapFor = function(calendarEvents) {
+  window.mappedEventListFor = function(calendarEvents) {
     var calendarEvent, eventMap, _fn, _i, _len;
-    eventMap = {};
-    _fn = function(calendarEvent) {
+    eventMap = [];
+    _fn = function(calendarEvent, eventMap) {
       var collisions;
       collisions = collisionsFor(calendarEvent, calendarEvents);
       if (collisions.length === 0) {
         calendarEvent.width = 600;
-        return eventMap[calendarEvent];
+        return eventMap.push(calendarEvent);
       }
     };
     for (_i = 0, _len = calendarEvents.length; _i < _len; _i++) {
       calendarEvent = calendarEvents[_i];
-      _fn(calendarEvent);
+      _fn(calendarEvent, eventMap);
     }
     return eventMap;
   };

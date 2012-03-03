@@ -35,6 +35,10 @@ describe "layout problem", ->
     it "should exist", ->
       expect(CalendarEvent).toBeDefined()
 
+    it "should have a list of collisions", ->
+      expect( new CalendarEvent( nineToElevenObject ).collisions ).toBeDefined
+      expect( new CalendarEvent( nineToElevenObject ).collisions instanceof Array ).toBeTruthy()
+
     it "should accept an event object as defined in the puzzle instructions", ->
       calendarEvent = new CalendarEvent( id : 1, start : 60, end : 120 )
       expect(calendarEvent.id).toEqual 1
@@ -82,8 +86,16 @@ describe "layout problem", ->
     xit "should set the widths of two colliding events to 300", ->
       expect(event.width).toEqual 300 for event in layOutDay( [ nineToEleven, tenToNoon ] )
 
-  describe "eventMapFor", ->
+  describe "mappedEventListFor", ->
 
+    it "should be a function", ->
+      expect( mappedEventListFor ).toBeDefined()
+
+    it "should return an array", ->
+      expect( mappedEventListFor( calendarEvents ) instanceof Array ).toBeTruthy()
+
+    it "return an array containing (at least) non-colliding events", ->
+      expect( mappedEventListFor( calendarEvents ) ).toContain thirteenToFifteen
 
   describe "collisionsFor", ->
 

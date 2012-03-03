@@ -36,6 +36,10 @@
       it("should exist", function() {
         return expect(CalendarEvent).toBeDefined();
       });
+      it("should have a list of collisions", function() {
+        expect(new CalendarEvent(nineToElevenObject).collisions).toBeDefined;
+        return expect(new CalendarEvent(nineToElevenObject).collisions instanceof Array).toBeTruthy();
+      });
       it("should accept an event object as defined in the puzzle instructions", function() {
         var calendarEvent;
         calendarEvent = new CalendarEvent({
@@ -122,7 +126,17 @@
         return _results;
       });
     });
-    describe("eventMapFor", function() {});
+    describe("mappedEventListFor", function() {
+      it("should be a function", function() {
+        return expect(mappedEventListFor).toBeDefined();
+      });
+      it("should return an array", function() {
+        return expect(mappedEventListFor(calendarEvents) instanceof Array).toBeTruthy();
+      });
+      return it("return an array containing (at least) non-colliding events", function() {
+        return expect(mappedEventListFor(calendarEvents)).toContain(thirteenToFifteen);
+      });
+    });
     return describe("collisionsFor", function() {
       it("should be a function", function() {
         return expect(collisionsFor).toBeDefined();
