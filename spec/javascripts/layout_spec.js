@@ -71,7 +71,7 @@
       it("should return as many events as it was given", function() {
         return expect(layOutDay(events).length).toEqual(events.length);
       });
-      return it("should return events with width, left, and top set in addition to id, start, and end", function() {
+      it("should return events with width, left, and top set in addition to id, start, and end", function() {
         var event, _i, _j, _k, _l, _len, _len2, _len3, _len4, _ref, _ref2, _ref3, _ref4, _results;
         _ref = layOutDay(events);
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -93,6 +93,16 @@
         for (_l = 0, _len4 = _ref4.length; _l < _len4; _l++) {
           event = _ref4[_l];
           _results.push(expect(event.width).toBeDefined());
+        }
+        return _results;
+      });
+      return it("should set non-colliding event widths to 600", function() {
+        var event, _i, _len, _ref, _results;
+        _ref = layOutDay([thirteenToFifteenObject]);
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          event = _ref[_i];
+          _results.push(expect(event.width).toEqual(600));
         }
         return _results;
       });

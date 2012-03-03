@@ -66,5 +66,7 @@ describe "layout problem", ->
       expect(event.left).toBeDefined() for event in layOutDay(events)
       expect(event.width).toBeDefined() for event in layOutDay(events)
 
+    it "should set non-colliding event widths to 600", ->
+      expect(event.width).toEqual 600 for event in layOutDay( [ thirteenToFifteenObject ] )
 
 
