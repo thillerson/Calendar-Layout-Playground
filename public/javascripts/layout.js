@@ -1,7 +1,7 @@
 (function() {
 
   window.layOutDay = function(events) {
-    return [];
+    return events;
   };
 
 }).call(this);

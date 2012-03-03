@@ -1,3 +1,3 @@
 window.layOutDay = (events) ->
-  []
+  events
 
