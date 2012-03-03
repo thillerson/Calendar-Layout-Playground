@@ -4,8 +4,10 @@ class CalendarEvent
     @id = @eventObject.id
     @start = @eventObject.start
     @end = @eventObject.end
+    @top = @start
 
   collidesWith: (another) ->
+    return false if another == @
     (@start <= another.start <= @end) or (@start <= another.end <= @end)
 
   startsBefore: (another) ->
@@ -17,16 +19,29 @@ class CalendarEvent
 window.CalendarEvent = CalendarEvent
 
 window.layOutDay = (events) ->
-  window.setTopFor event for event in events
-  window.setLeftFor event for event in events
-  window.setWidthFor event for event in events
-  events
+  calendarEvents = (new CalendarEvent(event) for event in events)
+  eventMap = eventMapFor calendarEvents
+  calendarEvents
 
-window.setTopFor = (event) ->
-  event.top = event.start
+# eventMapFor returns a hash where the keys
+# should be all the left anchored calendar events
+window.eventMapFor = (calendarEvents) ->
+  eventMap = {}
+  for calendarEvent in calendarEvents
+    do (calendarEvent) ->
+      collisions = collisionsFor calendarEvent, calendarEvents
+      if ( collisions.length == 0 )
+        calendarEvent.width = 600
+        eventMap[calendarEvent]
 
-window.setLeftFor = (event) ->
-  event.left = 0
+  eventMap
 
-window.setWidthFor = (event) ->
-  event.width = 600
+window.collisionsFor = (calendarEvent, calendarEvents) ->
+  collisions = []
+  for otherEvent in calendarEvents
+    do (calendarEvent, otherEvent, collisions) ->
+      collisions.push otherEvent if calendarEvent.collidesWith otherEvent
+      collisions
+
+  collisions
+

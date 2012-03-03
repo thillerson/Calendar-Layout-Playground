@@ -1,6 +1,7 @@
 describe "layout problem", ->
 
   events                   = null
+  calendarEvents           = null
   nineToElevenObject       = null
   tenToNoonObject          = null
   thirteenToFifteenObject  = null
@@ -22,6 +23,12 @@ describe "layout problem", ->
     nineToEleven             = new CalendarEvent( nineToElevenObject )
     tenToNoon                = new CalendarEvent( tenToNoonObject )
     thirteenToFifteen        = new CalendarEvent( thirteenToFifteenObject )
+
+    calendarEvents = [
+      tenToNoon
+      nineToEleven
+      thirteenToFifteen
+    ]
 
   describe "CalendarEvent", ->
 
@@ -48,6 +55,9 @@ describe "layout problem", ->
       expect( nineToEleven.endsAfter tenToNoon ).toBeFalsy()
       expect( tenToNoon.endsAfter nineToEleven ).toBeTruthy()
 
+    it "should not collide with itself", ->
+      expect( nineToEleven.collidesWith nineToEleven ).toBeFalsy()
+
   describe "layOutDay", ->
 
     it "should be a function", ->
@@ -60,7 +70,7 @@ describe "layout problem", ->
     it "should return as many events as it was given", ->
       expect( layOutDay(events).length ).toEqual events.length
 
-    it "should return events with width, left, and top set in addition to id, start, and end", ->
+    xit "should return events with width, left, and top set in addition to id, start, and end", ->
       expect(event.top).toBeDefined() for event in layOutDay(events)
       expect(event.top).toEqual(event.start) for event in layOutDay(events)
       expect(event.left).toBeDefined() for event in layOutDay(events)
@@ -69,4 +79,22 @@ describe "layout problem", ->
     it "should set non-colliding event widths to 600", ->
       expect(event.width).toEqual 600 for event in layOutDay( [ thirteenToFifteenObject ] )
 
+    xit "should set the widths of two colliding events to 300", ->
+      expect(event.width).toEqual 300 for event in layOutDay( [ nineToEleven, tenToNoon ] )
 
+  describe "eventMapFor", ->
+
+
+  describe "collisionsFor", ->
+
+    it "should be a function", ->
+      expect( collisionsFor ).toBeDefined()
+
+    it "should return an array", ->
+      expect( collisionsFor( thirteenToFifteen, calendarEvents ) instanceof Array ).toBeTruthy()
+
+    it "should return an empty array if there are no collisions", ->
+      expect( collisionsFor( thirteenToFifteen, calendarEvents ).length ).toEqual 0
+
+    it "should return all collisions if there are any", ->
+      expect( collisionsFor( nineToEleven, calendarEvents ).length ).toEqual 1
