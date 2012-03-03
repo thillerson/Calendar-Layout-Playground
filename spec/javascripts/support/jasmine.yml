@@ -1,0 +1,9 @@
+src_dir: public/javascripts
+
+src_files:
+  - layout.js
+
+spec_dir: spec/javascripts
+
+spec_files:
+  - "**/*_spec.js"
