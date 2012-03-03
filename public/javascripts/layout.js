@@ -1,4 +1,15 @@
 (function() {
+  var CalendarEvent;
+
+  CalendarEvent = (function() {
+
+    function CalendarEvent() {}
+
+    return CalendarEvent;
+
+  })();
+
+  window.CalendarEvent = CalendarEvent;
 
   window.layOutDay = function(events) {
     var event, _i, _j, _len, _len2;
@@ -19,10 +30,6 @@
 
   window.setLeftFor = function(event) {
     return event.left = 0;
-  };
-
-  window.detectCollisions = function(events) {
-    return [];
   };
 
 }).call(this);
