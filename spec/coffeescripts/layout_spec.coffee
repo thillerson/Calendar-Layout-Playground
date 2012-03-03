@@ -9,16 +9,18 @@ describe "layOutDay", ->
       { id : 3, start : 700, end : 720 }
     ]
 
-  it "should be a function on window", ->
-    expect( window.layOutDay ).toBeDefined()
+  it "should be a function", ->
+    expect( layOutDay ).toBeDefined()
 
   it "should return an array", ->
-    expect( window.layOutDay([]) instanceof Array ).toBeTruthy()
+    expect( layOutDay([]) instanceof Array ).toBeTruthy()
 
   it "should return as many events as it was given", ->
-    expect( window.layOutDay(events).length ).toEqual events.length
+    expect( layOutDay(events).length ).toEqual events.length
 
   it "should return events with left and top set in addition to id, start, and end", ->
-    expect(event.top).toBeDefined() for event in window.layOutDay(events)
-    expect(event.top).toEqual(event.start) for event in window.layOutDay(events)
-    expect(event.left).toBeDefined() for event in window.layOutDay(events)
+    expect(event.top).toBeDefined() for event in layOutDay(events)
+    expect(event.top).toEqual(event.start) for event in layOutDay(events)
+    expect(event.left).toBeDefined() for event in layOutDay(events)
+
+
