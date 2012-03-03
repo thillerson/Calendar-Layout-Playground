@@ -37,11 +37,15 @@
         expect(calendarEvent.start).toEqual(60);
         return expect(calendarEvent.end).toEqual(120);
       });
-      return it("should know when it collides with another calendar event", function() {
+      it("should know when it collides with another calendar event", function() {
         expect(nineToEleven.collidesWith(tenToNoon)).toBeTruthy();
         expect(tenToNoon.collidesWith(nineToEleven)).toBeTruthy();
         expect(thirteenToFifteen.collidesWith(nineToEleven)).toBeFalsy();
         return expect(thirteenToFifteen.collidesWith(tenToNoon)).toBeFalsy();
+      });
+      return it("should know when it starts before another event", function() {
+        expect(nineToEleven.startsBefore(tenToNoon)).toBeTruthy();
+        return expect(tenToNoon.startsBefore(nineToEleven)).toBeFalsy();
       });
     });
     return describe("layOutDay", function() {

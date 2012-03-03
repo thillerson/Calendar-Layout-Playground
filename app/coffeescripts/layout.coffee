@@ -8,6 +8,9 @@ class CalendarEvent
   collidesWith: (another) ->
     (@start <= another.start <= @end) or (@start <= another.end <= @end)
 
+  startsBefore: (another) ->
+    @start < another.start
+
 window.CalendarEvent = CalendarEvent
 
 window.layOutDay = (events) ->

@@ -15,6 +15,10 @@
       return ((this.start <= (_ref = another.start) && _ref <= this.end)) || ((this.start <= (_ref2 = another.end) && _ref2 <= this.end));
     };
 
+    CalendarEvent.prototype.startsBefore = function(another) {
+      return this.start < another.start;
+    };
+
     return CalendarEvent;
 
   })();

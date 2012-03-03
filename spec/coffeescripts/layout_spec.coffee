@@ -21,10 +21,14 @@ describe "layout problem", ->
       expect(calendarEvent.end).toEqual 120
 
     it "should know when it collides with another calendar event", ->
-      expect(nineToEleven.collidesWith tenToNoon ).toBeTruthy()
-      expect(tenToNoon.collidesWith nineToEleven ).toBeTruthy()
-      expect(thirteenToFifteen.collidesWith nineToEleven ).toBeFalsy()
-      expect(thirteenToFifteen.collidesWith tenToNoon ).toBeFalsy()
+      expect( nineToEleven.collidesWith tenToNoon ).toBeTruthy()
+      expect( tenToNoon.collidesWith nineToEleven ).toBeTruthy()
+      expect( thirteenToFifteen.collidesWith nineToEleven ).toBeFalsy()
+      expect( thirteenToFifteen.collidesWith tenToNoon ).toBeFalsy()
+
+    it "should know when it starts before another event", ->
+      expect( nineToEleven.startsBefore tenToNoon ).toBeTruthy()
+      expect( tenToNoon.startsBefore nineToEleven ).toBeFalsy()
 
   describe "layOutDay", ->
 
