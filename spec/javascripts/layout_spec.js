@@ -1,7 +1,28 @@
 (function() {
 
   describe("layout problem", function() {
-    describe("event", function() {
+    describe("CalendarEvent", function() {
+      var nineToEleven, tenToNoon, thirteenToFifteen;
+      nineToEleven = null;
+      tenToNoon = null;
+      thirteenToFifteen = null;
+      beforeEach(function() {
+        nineToEleven = new CalendarEvent({
+          id: 1,
+          start: 0,
+          end: 120
+        });
+        tenToNoon = new CalendarEvent({
+          id: 2,
+          start: 60,
+          end: 180
+        });
+        return thirteenToFifteen = new CalendarEvent({
+          id: 2,
+          start: 240,
+          end: 360
+        });
+      });
       it("should exist", function() {
         return expect(CalendarEvent).toBeDefined();
       });
@@ -17,22 +38,6 @@
         return expect(calendarEvent.end).toEqual(120);
       });
       return it("should know when it collides with another calendar event", function() {
-        var nineToEleven, tenToNoon, thirteenToFifteen;
-        nineToEleven = new CalendarEvent({
-          id: 1,
-          start: 0,
-          end: 120
-        });
-        tenToNoon = new CalendarEvent({
-          id: 2,
-          start: 60,
-          end: 180
-        });
-        thirteenToFifteen = new CalendarEvent({
-          id: 2,
-          start: 240,
-          end: 360
-        });
         expect(nineToEleven.collidesWith(tenToNoon)).toBeTruthy();
         expect(tenToNoon.collidesWith(nineToEleven)).toBeTruthy();
         expect(thirteenToFifteen.collidesWith(nineToEleven)).toBeFalsy();

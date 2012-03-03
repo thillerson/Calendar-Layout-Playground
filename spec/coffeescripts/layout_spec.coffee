@@ -1,5 +1,15 @@
 describe "layout problem", ->
-  describe "event", ->
+
+  describe "CalendarEvent", ->
+
+    nineToEleven       = null
+    tenToNoon          = null
+    thirteenToFifteen  = null
+
+    beforeEach ->
+      nineToEleven          = new CalendarEvent( id : 1, start : 0, end : 120 )
+      tenToNoon             = new CalendarEvent( id : 2, start : 60, end : 180 )
+      thirteenToFifteen     = new CalendarEvent( id : 2, start : 240, end : 360 )
 
     it "should exist", ->
       expect(CalendarEvent).toBeDefined()
@@ -11,9 +21,6 @@ describe "layout problem", ->
       expect(calendarEvent.end).toEqual 120
 
     it "should know when it collides with another calendar event", ->
-      nineToEleven          = new CalendarEvent( id : 1, start : 0, end : 120 )
-      tenToNoon             = new CalendarEvent( id : 2, start : 60, end : 180 )
-      thirteenToFifteen     = new CalendarEvent( id : 2, start : 240, end : 360 )
       expect(nineToEleven.collidesWith tenToNoon ).toBeTruthy()
       expect(tenToNoon.collidesWith nineToEleven ).toBeTruthy()
       expect(thirteenToFifteen.collidesWith nineToEleven ).toBeFalsy()
