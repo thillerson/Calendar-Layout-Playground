@@ -2,6 +2,7 @@ src_dir: public/javascripts
 
 src_files:
   - layout.js
+  - vendor/*.js
 
 spec_dir: spec/javascripts
 
