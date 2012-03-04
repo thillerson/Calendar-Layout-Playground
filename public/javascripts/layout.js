@@ -65,6 +65,10 @@
     return FULL_WIDTH / collisionList.length;
   };
 
+  window.leftPositionForIndexInCollisionList = function(index, collisionList) {
+    return (FULL_WIDTH / collisionList.length) * index;
+  };
+
   window.collisionsFor = function(calendarEvent, calendarEvents) {
     var collisions, otherEvent, _fn, _i, _len;
     collisions = [];

@@ -33,6 +33,9 @@ window.sizeCollisionList = (collisionList) ->
 window.widthForIndexInCollisionList = (index, collisionList) ->
   FULL_WIDTH / collisionList.length
 
+window.leftPositionForIndexInCollisionList = (index, collisionList) ->
+  ( FULL_WIDTH / collisionList.length ) * index
+
 window.collisionsFor = (calendarEvent, calendarEvents) ->
   collisions = []
   for otherEvent in calendarEvents

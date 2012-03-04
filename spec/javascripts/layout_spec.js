@@ -192,6 +192,25 @@
           return expect(widthForIndexInCollisionList(1, [nineToEleven, tenToNoon])).toEqual(300);
         });
       });
+      return describe("leftPositionForIndexInCollisionList", function() {
+        it("should be a function", function() {
+          return expect(leftPositionForIndexInCollisionList).toBeDefined();
+        });
+        it("should return 0 for a list with one element", function() {
+          return expect(leftPositionForIndexInCollisionList(0, [nineToEleven])).toEqual(0);
+        });
+        it("should return 0 for the first item in a list with two elements", function() {
+          return expect(leftPositionForIndexInCollisionList(0, [nineToEleven, tenToNoon])).toEqual(0);
+        });
+        it("should return 300 for the second item in a list with two elements", function() {
+          return expect(leftPositionForIndexInCollisionList(1, [nineToEleven, tenToNoon])).toEqual(300);
+        });
+        return it("should return expected values for a three item array", function() {
+          expect(leftPositionForIndexInCollisionList(0, [a, b, c])).toEqual(0);
+          expect(leftPositionForIndexInCollisionList(1, [a, b, c])).toEqual(200);
+          return expect(leftPositionForIndexInCollisionList(2, [a, b, c])).toEqual(400);
+        });
+      });
     });
   });
 

@@ -153,3 +153,22 @@ describe "layout problem", ->
       it "should return 300 for the last item in a list with two elements", ->
         expect( widthForIndexInCollisionList(1, [ nineToEleven, tenToNoon ]) ).toEqual 300
 
+    describe "leftPositionForIndexInCollisionList", ->
+
+      it "should be a function", ->
+        expect( leftPositionForIndexInCollisionList ).toBeDefined()
+
+      it "should return 0 for a list with one element", ->
+        expect( leftPositionForIndexInCollisionList(0, [ nineToEleven ]) ).toEqual 0
+
+      it "should return 0 for the first item in a list with two elements", ->
+        expect( leftPositionForIndexInCollisionList(0, [ nineToEleven, tenToNoon ]) ).toEqual 0
+
+      it "should return 300 for the second item in a list with two elements", ->
+        expect( leftPositionForIndexInCollisionList(1, [ nineToEleven, tenToNoon ]) ).toEqual 300
+
+      it "should return expected values for a three item array", ->
+        expect( leftPositionForIndexInCollisionList(0, [ a, b, c ]) ).toEqual 0
+        expect( leftPositionForIndexInCollisionList(1, [ a, b, c ]) ).toEqual 200
+        expect( leftPositionForIndexInCollisionList(2, [ a, b, c ]) ).toEqual 400
+
