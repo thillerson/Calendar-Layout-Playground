@@ -7,7 +7,8 @@ class CalendarEvent
     @start = @eventObject.start
     @end = @eventObject.end
     @top = @start
-    @collisions = []
+    @left = 0
+    @width = 0
 
   collidesWith: (another) ->
     return false if another == @
@@ -23,6 +24,11 @@ window.CalendarEvent = CalendarEvent
 
 window.layOutDay = (events) ->
   calendarEvents = (new CalendarEvent(event) for event in events)
+  for calendarEvent in calendarEvents
+    do (calendarEvent, calendarEvents) ->
+      collisionList = collisionsFor calendarEvent, calendarEvents
+      collisionList.push calendarEvent if collisionList.length == 0
+      sizeCollisionList collisionList
   calendarEvents
 
 window.sizeCollisionList = (collisionList) ->

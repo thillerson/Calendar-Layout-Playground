@@ -11,7 +11,8 @@
       this.start = this.eventObject.start;
       this.end = this.eventObject.end;
       this.top = this.start;
-      this.collisions = [];
+      this.left = 0;
+      this.width = 0;
     }
 
     CalendarEvent.prototype.collidesWith = function(another) {
@@ -35,7 +36,7 @@
   window.CalendarEvent = CalendarEvent;
 
   window.layOutDay = function(events) {
-    var calendarEvents, event;
+    var calendarEvent, calendarEvents, event, _fn, _i, _len;
     calendarEvents = (function() {
       var _i, _len, _results;
       _results = [];
@@ -45,6 +46,16 @@
       }
       return _results;
     })();
+    _fn = function(calendarEvent, calendarEvents) {
+      var collisionList;
+      collisionList = collisionsFor(calendarEvent, calendarEvents);
+      if (collisionList.length === 0) collisionList.push(calendarEvent);
+      return sizeCollisionList(collisionList);
+    };
+    for (_i = 0, _len = calendarEvents.length; _i < _len; _i++) {
+      calendarEvent = calendarEvents[_i];
+      _fn(calendarEvent, calendarEvents);
+    }
     return calendarEvents;
   };
 

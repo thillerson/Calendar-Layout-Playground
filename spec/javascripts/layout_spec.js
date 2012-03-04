@@ -73,10 +73,6 @@
       it("should exist", function() {
         return expect(CalendarEvent).toBeDefined();
       });
-      it("should have a list of collisions", function() {
-        expect(new CalendarEvent(nineToElevenObject).collisions).toBeDefined;
-        return expect(new CalendarEvent(nineToElevenObject).collisions instanceof Array).toBeTruthy();
-      });
       it("should accept an event object as defined in the puzzle instructions", function() {
         var calendarEvent;
         calendarEvent = new CalendarEvent({
@@ -127,12 +123,12 @@
       it("should return as many events as it was given", function() {
         return expect(layOutDay(events).length).toEqual(events.length);
       });
-      xit("should set non-colliding event widths to 600", function() {
-        var event, _i, _len, _ref, _results;
-        _ref = layOutDay([thirteenToFifteenObject]);
+      it("should set non-colliding event widths to 600", function() {
+        var event, layout, _i, _len, _results;
+        layout = layOutDay([thirteenToFifteenObject]);
         _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          event = _ref[_i];
+        for (_i = 0, _len = layout.length; _i < _len; _i++) {
+          event = layout[_i];
           _results.push(expect(event.width).toEqual(600));
         }
         return _results;
