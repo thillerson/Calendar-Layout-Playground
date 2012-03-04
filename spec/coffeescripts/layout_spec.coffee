@@ -127,17 +127,17 @@ describe "layout problem", ->
       it "should be a function", ->
         expect( sizeCollisionList ).toBeDefined()
 
-      xit "should size a list of one element as expected", ->
+      it "should size a list of one element as expected", ->
         sizeCollisionList [ nineToEleven ]
         expect( nineToEleven.left ).toEqual 0
         expect( nineToEleven.width ).toEqual 600
 
-      xit "should size a list of two elements as expected", ->
+      it "should size a list of two elements as expected", ->
         sizeCollisionList [ nineToEleven, tenToNoon ]
         expect( nineToEleven.left ).toEqual 0
-        expect( nineToEleven.width ).toEqual 199
-        expect( tenToNoon.left ).toEqual 200
-        expect( tenToNoon.width ).toEqual 199
+        expect( nineToEleven.width ).toEqual 300
+        expect( tenToNoon.left ).toEqual 300
+        expect( tenToNoon.width ).toEqual 300
 
     describe "widthForIndexInCollisionList", ->
 

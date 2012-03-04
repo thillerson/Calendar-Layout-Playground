@@ -29,6 +29,9 @@ window.sizeCollisionList = (collisionList) ->
   sortedList = _.sortBy collisionList, (item) -> item.start
   for item, index in sortedList
     do (item, index, sortedList) ->
+      # OMG - Side effects!
+      item.left = leftPositionForIndexInCollisionList index, sortedList
+      item.width = widthForIndexInCollisionList index, sortedList
 
 window.widthForIndexInCollisionList = (index, collisionList) ->
   FULL_WIDTH / collisionList.length

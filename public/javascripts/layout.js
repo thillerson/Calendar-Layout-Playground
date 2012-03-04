@@ -56,7 +56,10 @@
     _results = [];
     for (index = 0, _len = sortedList.length; index < _len; index++) {
       item = sortedList[index];
-      _results.push((function(item, index, sortedList) {})(item, index, sortedList));
+      _results.push((function(item, index, sortedList) {
+        item.left = leftPositionForIndexInCollisionList(index, sortedList);
+        return item.width = widthForIndexInCollisionList(index, sortedList);
+      })(item, index, sortedList));
     }
     return _results;
   };
