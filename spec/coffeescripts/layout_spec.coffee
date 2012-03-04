@@ -121,3 +121,35 @@ describe "layout problem", ->
 
     it "should return all collisions if there are any", ->
       expect( collisionsFor( nineToEleven, calendarEvents ).length ).toEqual 1
+
+    describe "sizeCollisionList", ->
+
+      it "should be a function", ->
+        expect( sizeCollisionList ).toBeDefined()
+
+      xit "should size a list of one element as expected", ->
+        sizeCollisionList [ nineToEleven ]
+        expect( nineToEleven.left ).toEqual 0
+        expect( nineToEleven.width ).toEqual 600
+
+      xit "should size a list of two elements as expected", ->
+        sizeCollisionList [ nineToEleven, tenToNoon ]
+        expect( nineToEleven.left ).toEqual 0
+        expect( nineToEleven.width ).toEqual 199
+        expect( tenToNoon.left ).toEqual 200
+        expect( tenToNoon.width ).toEqual 199
+
+    describe "widthForIndexInCollisionList", ->
+
+      it "should be a function", ->
+        expect( widthForIndexInCollisionList ).toBeDefined()
+
+      it "should return 600 for a list with one element", ->
+        expect( widthForIndexInCollisionList(0, [ nineToEleven ]) ).toEqual 600
+
+      it "should return 300 for the first item in a list with two elements", ->
+        expect( widthForIndexInCollisionList(0, [ nineToEleven, tenToNoon ]) ).toEqual 300
+
+      it "should return 299 for the last item in a list with two elements", ->
+        expect( widthForIndexInCollisionList(1, [ nineToEleven, tenToNoon ]) ).toEqual 299
+

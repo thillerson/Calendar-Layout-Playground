@@ -1,5 +1,7 @@
 (function() {
-  var CalendarEvent;
+  var CalendarEvent, FULL_WIDTH;
+
+  FULL_WIDTH = 600;
 
   CalendarEvent = (function() {
 
@@ -44,6 +46,26 @@
       return _results;
     })();
     return calendarEvents;
+  };
+
+  window.sizeCollisionList = function(collisionList) {
+    var index, item, sortedList, _len, _results;
+    sortedList = _.sortBy(collisionList, function(item) {
+      return item.start;
+    });
+    _results = [];
+    for (index = 0, _len = sortedList.length; index < _len; index++) {
+      item = sortedList[index];
+      _results.push((function(item, index, sortedList) {})(item, index, sortedList));
+    }
+    return _results;
+  };
+
+  window.widthForIndexInCollisionList = function(index, collisionList) {
+    var width;
+    width = FULL_WIDTH / collisionList.length;
+    if (index === (index > 0 && collisionList.length - 1)) width = width - 1;
+    return width;
   };
 
   window.collisionsFor = function(calendarEvent, calendarEvents) {

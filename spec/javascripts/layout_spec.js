@@ -158,8 +158,39 @@
       it("should return an empty array if there are no collisions", function() {
         return expect(collisionsFor(thirteenToFifteen, calendarEvents).length).toEqual(0);
       });
-      return it("should return all collisions if there are any", function() {
+      it("should return all collisions if there are any", function() {
         return expect(collisionsFor(nineToEleven, calendarEvents).length).toEqual(1);
+      });
+      describe("sizeCollisionList", function() {
+        it("should be a function", function() {
+          return expect(sizeCollisionList).toBeDefined();
+        });
+        xit("should size a list of one element as expected", function() {
+          sizeCollisionList([nineToEleven]);
+          expect(nineToEleven.left).toEqual(0);
+          return expect(nineToEleven.width).toEqual(600);
+        });
+        return xit("should size a list of two elements as expected", function() {
+          sizeCollisionList([nineToEleven, tenToNoon]);
+          expect(nineToEleven.left).toEqual(0);
+          expect(nineToEleven.width).toEqual(199);
+          expect(tenToNoon.left).toEqual(200);
+          return expect(tenToNoon.width).toEqual(199);
+        });
+      });
+      return describe("widthForIndexInCollisionList", function() {
+        it("should be a function", function() {
+          return expect(widthForIndexInCollisionList).toBeDefined();
+        });
+        it("should return 600 for a list with one element", function() {
+          return expect(widthForIndexInCollisionList(0, [nineToEleven])).toEqual(600);
+        });
+        it("should return 300 for the first item in a list with two elements", function() {
+          return expect(widthForIndexInCollisionList(0, [nineToEleven, tenToNoon])).toEqual(300);
+        });
+        return it("should return 299 for the last item in a list with two elements", function() {
+          return expect(widthForIndexInCollisionList(1, [nineToEleven, tenToNoon])).toEqual(299);
+        });
       });
     });
   });
