@@ -95,17 +95,18 @@ describe "layout problem", ->
     it "should return as many events as it was given", ->
       expect( layOutDay(events).length ).toEqual events.length
 
-    xit "should return events with width, left, and top set in addition to id, start, and end", ->
-      expect(event.top).toBeDefined() for event in layOutDay(events)
-      expect(event.top).toEqual(event.start) for event in layOutDay(events)
-      expect(event.left).toBeDefined() for event in layOutDay(events)
-      expect(event.width).toBeDefined() for event in layOutDay(events)
-
     xit "should set non-colliding event widths to 600", ->
       expect(event.width).toEqual 600 for event in layOutDay( [ thirteenToFifteenObject ] )
 
-    xit "should set the widths of two colliding events to 300", ->
-      expect(event.width).toEqual 300 for event in layOutDay( [ nineToEleven, tenToNoon ] )
+    xit "should lay out the example problem set (with letters) as expected", ->
+      layOutDay deepEventList
+      expect( a.left ).toEqual 0
+      expect( b.left ).toEqual 200
+      expect( c.left ).toEqual 400
+      expect( d.left ).toEqual 0
+      expect( e.left ).toEqual 200
+      expect( f.left ).toEqual 0
+      expect( g.left ).toEqual 0
 
   describe "collisionsFor", ->
 

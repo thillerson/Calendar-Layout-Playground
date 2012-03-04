@@ -127,31 +127,6 @@
       it("should return as many events as it was given", function() {
         return expect(layOutDay(events).length).toEqual(events.length);
       });
-      xit("should return events with width, left, and top set in addition to id, start, and end", function() {
-        var event, _i, _j, _k, _l, _len, _len2, _len3, _len4, _ref, _ref2, _ref3, _ref4, _results;
-        _ref = layOutDay(events);
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          event = _ref[_i];
-          expect(event.top).toBeDefined();
-        }
-        _ref2 = layOutDay(events);
-        for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
-          event = _ref2[_j];
-          expect(event.top).toEqual(event.start);
-        }
-        _ref3 = layOutDay(events);
-        for (_k = 0, _len3 = _ref3.length; _k < _len3; _k++) {
-          event = _ref3[_k];
-          expect(event.left).toBeDefined();
-        }
-        _ref4 = layOutDay(events);
-        _results = [];
-        for (_l = 0, _len4 = _ref4.length; _l < _len4; _l++) {
-          event = _ref4[_l];
-          _results.push(expect(event.width).toBeDefined());
-        }
-        return _results;
-      });
       xit("should set non-colliding event widths to 600", function() {
         var event, _i, _len, _ref, _results;
         _ref = layOutDay([thirteenToFifteenObject]);
@@ -162,15 +137,15 @@
         }
         return _results;
       });
-      return xit("should set the widths of two colliding events to 300", function() {
-        var event, _i, _len, _ref, _results;
-        _ref = layOutDay([nineToEleven, tenToNoon]);
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          event = _ref[_i];
-          _results.push(expect(event.width).toEqual(300));
-        }
-        return _results;
+      return xit("should lay out the example problem set (with letters) as expected", function() {
+        layOutDay(deepEventList);
+        expect(a.left).toEqual(0);
+        expect(b.left).toEqual(200);
+        expect(c.left).toEqual(400);
+        expect(d.left).toEqual(0);
+        expect(e.left).toEqual(200);
+        expect(f.left).toEqual(0);
+        return expect(g.left).toEqual(0);
       });
     });
     return describe("collisionsFor", function() {
