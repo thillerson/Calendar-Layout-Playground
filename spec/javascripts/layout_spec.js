@@ -178,7 +178,7 @@
           return expect(tenToNoon.width).toEqual(199);
         });
       });
-      return describe("widthForIndexInCollisionList", function() {
+      describe("widthForIndexInCollisionList", function() {
         it("should be a function", function() {
           return expect(widthForIndexInCollisionList).toBeDefined();
         });
@@ -188,8 +188,8 @@
         it("should return 300 for the first item in a list with two elements", function() {
           return expect(widthForIndexInCollisionList(0, [nineToEleven, tenToNoon])).toEqual(300);
         });
-        return it("should return 299 for the last item in a list with two elements", function() {
-          return expect(widthForIndexInCollisionList(1, [nineToEleven, tenToNoon])).toEqual(299);
+        return it("should return 300 for the last item in a list with two elements", function() {
+          return expect(widthForIndexInCollisionList(1, [nineToEleven, tenToNoon])).toEqual(300);
         });
       });
     });

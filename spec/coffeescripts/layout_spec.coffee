@@ -150,6 +150,6 @@ describe "layout problem", ->
       it "should return 300 for the first item in a list with two elements", ->
         expect( widthForIndexInCollisionList(0, [ nineToEleven, tenToNoon ]) ).toEqual 300
 
-      it "should return 299 for the last item in a list with two elements", ->
-        expect( widthForIndexInCollisionList(1, [ nineToEleven, tenToNoon ]) ).toEqual 299
+      it "should return 300 for the last item in a list with two elements", ->
+        expect( widthForIndexInCollisionList(1, [ nineToEleven, tenToNoon ]) ).toEqual 300
 

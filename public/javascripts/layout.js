@@ -62,10 +62,7 @@
   };
 
   window.widthForIndexInCollisionList = function(index, collisionList) {
-    var width;
-    width = FULL_WIDTH / collisionList.length;
-    if (index === (index > 0 && collisionList.length - 1)) width = width - 1;
-    return width;
+    return FULL_WIDTH / collisionList.length;
   };
 
   window.collisionsFor = function(calendarEvent, calendarEvents) {

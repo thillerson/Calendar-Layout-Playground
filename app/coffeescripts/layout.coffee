@@ -31,10 +31,7 @@ window.sizeCollisionList = (collisionList) ->
     do (item, index, sortedList) ->
 
 window.widthForIndexInCollisionList = (index, collisionList) ->
-  width = ( FULL_WIDTH / collisionList.length )
-  # The last element has to take up an extra pixel to balance out
-  width = width - 1 if index == (index > 0 and collisionList.length - 1)
-  width
+  FULL_WIDTH / collisionList.length
 
 window.collisionsFor = (calendarEvent, calendarEvents) ->
   collisions = []
