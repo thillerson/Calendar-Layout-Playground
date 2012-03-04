@@ -15,7 +15,7 @@
     CalendarEvent.prototype.collidesWith = function(another) {
       var _ref, _ref2;
       if (another === this) return false;
-      return ((this.start <= (_ref = another.start) && _ref <= this.end)) || ((this.start <= (_ref2 = another.end) && _ref2 <= this.end)) || (another.start <= this.start && another.end >= this.end);
+      return ((this.start < (_ref = another.start) && _ref < this.end)) || ((this.start < (_ref2 = another.end) && _ref2 < this.end)) || (another.start < this.start && another.end > this.end);
     };
 
     CalendarEvent.prototype.startsBefore = function(another) {

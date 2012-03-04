@@ -9,7 +9,7 @@ class CalendarEvent
 
   collidesWith: (another) ->
     return false if another == @
-    (@start <= another.start <= @end) or (@start <= another.end <= @end) or (another.start <= @start and another.end >= @end)
+    (@start < another.start < @end) or (@start < another.end < @end) or (another.start < @start and another.end > @end)
 
   startsBefore: (another) ->
     @start < another.start
