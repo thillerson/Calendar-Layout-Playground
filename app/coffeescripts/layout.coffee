@@ -9,7 +9,7 @@ class CalendarEvent
 
   collidesWith: (another) ->
     return false if another == @
-    (@start <= another.start <= @end) or (@start <= another.end <= @end)
+    (@start <= another.start <= @end) or (@start <= another.end <= @end) or (another.start <= @start and another.end >= @end)
 
   startsBefore: (another) ->
     @start < another.start
@@ -21,21 +21,7 @@ window.CalendarEvent = CalendarEvent
 
 window.layOutDay = (events) ->
   calendarEvents = (new CalendarEvent(event) for event in events)
-  eventMap = mappedEventListFor calendarEvents
   calendarEvents
-
-# mappedEventListFor returns a hash where the keys
-# should be all the left anchored calendar events
-window.mappedEventListFor = (calendarEvents) ->
-  eventMap = []
-  for calendarEvent in calendarEvents
-    do (calendarEvent, eventMap) ->
-      collisions = collisionsFor calendarEvent, calendarEvents
-      if ( collisions.length == 0 )
-        calendarEvent.width = 600
-        eventMap.push calendarEvent
-
-  eventMap
 
 window.collisionsFor = (calendarEvent, calendarEvents) ->
   collisions = []

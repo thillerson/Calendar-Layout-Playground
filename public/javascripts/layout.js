@@ -15,7 +15,7 @@
     CalendarEvent.prototype.collidesWith = function(another) {
       var _ref, _ref2;
       if (another === this) return false;
-      return ((this.start <= (_ref = another.start) && _ref <= this.end)) || ((this.start <= (_ref2 = another.end) && _ref2 <= this.end));
+      return ((this.start <= (_ref = another.start) && _ref <= this.end)) || ((this.start <= (_ref2 = another.end) && _ref2 <= this.end)) || (another.start <= this.start && another.end >= this.end);
     };
 
     CalendarEvent.prototype.startsBefore = function(another) {
@@ -33,7 +33,7 @@
   window.CalendarEvent = CalendarEvent;
 
   window.layOutDay = function(events) {
-    var calendarEvents, event, eventMap;
+    var calendarEvents, event;
     calendarEvents = (function() {
       var _i, _len, _results;
       _results = [];
@@ -43,26 +43,7 @@
       }
       return _results;
     })();
-    eventMap = mappedEventListFor(calendarEvents);
     return calendarEvents;
-  };
-
-  window.mappedEventListFor = function(calendarEvents) {
-    var calendarEvent, eventMap, _fn, _i, _len;
-    eventMap = [];
-    _fn = function(calendarEvent, eventMap) {
-      var collisions;
-      collisions = collisionsFor(calendarEvent, calendarEvents);
-      if (collisions.length === 0) {
-        calendarEvent.width = 600;
-        return eventMap.push(calendarEvent);
-      }
-    };
-    for (_i = 0, _len = calendarEvents.length; _i < _len; _i++) {
-      calendarEvent = calendarEvents[_i];
-      _fn(calendarEvent, eventMap);
-    }
-    return eventMap;
   };
 
   window.collisionsFor = function(calendarEvent, calendarEvents) {

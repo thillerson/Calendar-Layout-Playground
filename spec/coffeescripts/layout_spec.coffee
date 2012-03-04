@@ -1,5 +1,6 @@
 describe "layout problem", ->
 
+  a = b = c = d = e = f = g = deepEventList = null
   events                   = null
   calendarEvents           = null
   nineToElevenObject       = null
@@ -30,6 +31,16 @@ describe "layout problem", ->
       thirteenToFifteen
     ]
 
+    a = new CalendarEvent( id : "a", start : 0,  end : 119)
+    b = new CalendarEvent( id : "b", start : 15,  end : 135)
+    c = new CalendarEvent( id : "c", start : 30,  end : 270)
+    d = new CalendarEvent( id : "d", start : 120,  end : 239)
+    e = new CalendarEvent( id : "e", start : 150,  end : 250)
+    f = new CalendarEvent( id : "f", start : 240,  end : 360)
+    g = new CalendarEvent( id : "g", start : 700,  end : 720)
+    # randomizing the order for fun
+    deepEventList = [ e, a, b, f, d, c, g ]
+
   describe "CalendarEvent", ->
 
     it "should exist", ->
@@ -50,6 +61,15 @@ describe "layout problem", ->
       expect( tenToNoon.collidesWith nineToEleven ).toBeTruthy()
       expect( thirteenToFifteen.collidesWith nineToEleven ).toBeFalsy()
       expect( thirteenToFifteen.collidesWith tenToNoon ).toBeFalsy()
+      expect( g.collidesWith a ).toBeFalsy()
+      expect( a.collidesWith b ).toBeTruthy()
+      expect( a.collidesWith c ).toBeTruthy()
+      expect( d.collidesWith b ).toBeTruthy()
+      expect( d.collidesWith e ).toBeTruthy()
+      expect( d.collidesWith c ).toBeTruthy()
+      expect( f.collidesWith b ).toBeFalsy()
+      expect( f.collidesWith e ).toBeTruthy()
+      expect( f.collidesWith c ).toBeTruthy()
 
     it "should know when it starts before another event", ->
       expect( nineToEleven.startsBefore tenToNoon ).toBeTruthy()
@@ -85,17 +105,6 @@ describe "layout problem", ->
 
     xit "should set the widths of two colliding events to 300", ->
       expect(event.width).toEqual 300 for event in layOutDay( [ nineToEleven, tenToNoon ] )
-
-  describe "mappedEventListFor", ->
-
-    it "should be a function", ->
-      expect( mappedEventListFor ).toBeDefined()
-
-    it "should return an array", ->
-      expect( mappedEventListFor( calendarEvents ) instanceof Array ).toBeTruthy()
-
-    it "return an array containing (at least) non-colliding events", ->
-      expect( mappedEventListFor( calendarEvents ) ).toContain thirteenToFifteen
 
   describe "collisionsFor", ->
 
