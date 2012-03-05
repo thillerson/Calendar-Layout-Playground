@@ -198,3 +198,16 @@ describe "layout problem", ->
         expect( leftPositionForIndexInCollisionList(1, [ a, b, c ]) ).toEqual 200
         expect( leftPositionForIndexInCollisionList(2, [ a, b, c ]) ).toEqual 400
 
+    describe "normalizedCollisionList", ->
+
+      it "should be a function", ->
+        expect( normalizedCollisionList ).toBeDefined()
+
+      it "should return a list where all collide with each other, anchored by the earliest event", ->
+        normalizedList = normalizedCollisionList([a, d, f, b, e, c])
+        expect( normalizedList.length ).toEqual 3
+        expect( normalizedList ).toContain a
+        expect( normalizedList ).toContain b
+        expect( normalizedList ).toContain c
+        expect( normalizedList ).toNotContain d
+        expect( normalizedList ).toNotContain f

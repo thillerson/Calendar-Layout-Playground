@@ -252,6 +252,21 @@
           return expect(leftPositionForIndexInCollisionList(2, [a, b, c])).toEqual(400);
         });
       });
+      return describe("normalizedCollisionList", function() {
+        it("should be a function", function() {
+          return expect(normalizedCollisionList).toBeDefined();
+        });
+        return it("should return a list where all collide with each other, anchored by the earliest event", function() {
+          var normalizedList;
+          normalizedList = normalizedCollisionList([a, d, f, b, e, c]);
+          expect(normalizedList.length).toEqual(3);
+          expect(normalizedList).toContain(a);
+          expect(normalizedList).toContain(b);
+          expect(normalizedList).toContain(c);
+          expect(normalizedList).toNotContain(d);
+          return expect(normalizedList).toNotContain(f);
+        });
+      });
     });
   });
 

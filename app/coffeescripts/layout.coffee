@@ -54,3 +54,10 @@ window.collisionsFor = (calendarEvent, calendarEvents) ->
 
   collisions
 
+window.normalizedCollisionList = (collisionList) ->
+  sortedList = _.sortBy collisionList, (item) -> item.start
+  # current strategy - reject any that do not collide with the earliest item
+  # excluding itself.
+  earliest = _.first(sortedList)
+  normalizedList = _.reject( sortedList, (item) -> not item.collidesWith earliest )
+  _.flatten [ earliest, normalizedList ]
