@@ -47,10 +47,10 @@
       return _results;
     })();
     _fn = function(calendarEvent, calendarEvents) {
-      var collisionList;
+      var collisionList, normalizedList;
       collisionList = collisionsFor(calendarEvent, calendarEvents);
-      if (collisionList.length === 0) collisionList.push(calendarEvent);
-      return sizeCollisionList(collisionList);
+      normalizedList = normalizedCollisionList(_.union(calendarEvent, collisionList));
+      return sizeCollisionList(normalizedList);
     };
     for (_i = 0, _len = calendarEvents.length; _i < _len; _i++) {
       calendarEvent = calendarEvents[_i];
@@ -95,18 +95,6 @@
       _fn(calendarEvent, otherEvent, collisions);
     }
     return collisions;
-  };
-
-  window.normalizedCollisionList = function(collisionList) {
-    var earliest, normalizedList, sortedList;
-    sortedList = _.sortBy(collisionList, function(item) {
-      return item.start;
-    });
-    earliest = _.first(sortedList);
-    normalizedList = _.reject(sortedList, function(item) {
-      return !item.collidesWith(earliest);
-    });
-    return _.flatten([earliest, normalizedList]);
   };
 
 }).call(this);

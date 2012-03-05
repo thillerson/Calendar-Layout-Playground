@@ -87,7 +87,7 @@ describe "layout problem", ->
     it "should not collide with itself", ->
       expect( nineToEleven.collidesWith nineToEleven ).toBeFalsy()
 
-  describe "layOutDay", ->
+  xdescribe "layOutDay", ->
 
     it "should be a function", ->
       expect( layOutDay ).toBeDefined()
@@ -99,7 +99,7 @@ describe "layout problem", ->
     it "should return as many events as it was given", ->
       expect( layOutDay(events).length ).toEqual events.length
 
-    it "should set non-colliding event widths to 600", ->
+    xit "should set non-colliding event widths to 600", ->
       layout = layOutDay( [ thirteenToFifteenObject ] )
       expect(event.width).toEqual 600 for event in layout
 
@@ -112,20 +112,13 @@ describe "layout problem", ->
       eEvent = _.find(layout, (item) -> item.id == "e")
       fEvent = _.find(layout, (item) -> item.id == "f")
       gEvent = _.find(layout, (item) -> item.id == "g")
-      console.log("collision list for a: ", collisionsFor(aEvent, layout))
-      console.log("collision list for b: ", collisionsFor(bEvent, layout))
-      console.log("collision list for c: ", collisionsFor(cEvent, layout))
-      console.log("collision list for d: ", collisionsFor(dEvent, layout))
-      console.log("collision list for e: ", collisionsFor(eEvent, layout))
-      console.log("collision list for f: ", collisionsFor(fEvent, layout))
-      console.log("collision list for g: ", collisionsFor(gEvent, layout))
-      console.log(aEvent)
-      console.log(bEvent)
-      console.log(cEvent)
-      console.log(dEvent)
-      console.log(eEvent)
-      console.log(fEvent)
-      console.log(gEvent)
+      expect( aEvent.width ).toEqual 200
+      expect( bEvent.width ).toEqual 200
+      expect( cEvent.width ).toEqual 200
+      expect( dEvent.width ).toEqual 200
+      expect( eEvent.width ).toEqual 200
+      expect( fEvent.width ).toEqual 200
+      expect( gEvent.width ).toEqual 600
       expect( aEvent.left ).toEqual 0
       expect( bEvent.left ).toEqual 200
       expect( cEvent.left ).toEqual 400
@@ -198,16 +191,3 @@ describe "layout problem", ->
         expect( leftPositionForIndexInCollisionList(1, [ a, b, c ]) ).toEqual 200
         expect( leftPositionForIndexInCollisionList(2, [ a, b, c ]) ).toEqual 400
 
-    describe "normalizedCollisionList", ->
-
-      it "should be a function", ->
-        expect( normalizedCollisionList ).toBeDefined()
-
-      it "should return a list where all collide with each other, anchored by the earliest event", ->
-        normalizedList = normalizedCollisionList([a, d, f, b, e, c])
-        expect( normalizedList.length ).toEqual 3
-        expect( normalizedList ).toContain a
-        expect( normalizedList ).toContain b
-        expect( normalizedList ).toContain c
-        expect( normalizedList ).toNotContain d
-        expect( normalizedList ).toNotContain f

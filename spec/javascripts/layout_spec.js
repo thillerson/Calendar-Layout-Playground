@@ -121,7 +121,7 @@
         return expect(nineToEleven.collidesWith(nineToEleven)).toBeFalsy();
       });
     });
-    describe("layOutDay", function() {
+    xdescribe("layOutDay", function() {
       it("should be a function", function() {
         expect(layOutDay).toBeDefined();
         return expect(layOutDay instanceof Function).toBeTruthy();
@@ -132,7 +132,7 @@
       it("should return as many events as it was given", function() {
         return expect(layOutDay(events).length).toEqual(events.length);
       });
-      it("should set non-colliding event widths to 600", function() {
+      xit("should set non-colliding event widths to 600", function() {
         var event, layout, _i, _len, _results;
         layout = layOutDay([thirteenToFifteenObject]);
         _results = [];
@@ -166,20 +166,13 @@
         gEvent = _.find(layout, function(item) {
           return item.id === "g";
         });
-        console.log("collision list for a: ", collisionsFor(aEvent, layout));
-        console.log("collision list for b: ", collisionsFor(bEvent, layout));
-        console.log("collision list for c: ", collisionsFor(cEvent, layout));
-        console.log("collision list for d: ", collisionsFor(dEvent, layout));
-        console.log("collision list for e: ", collisionsFor(eEvent, layout));
-        console.log("collision list for f: ", collisionsFor(fEvent, layout));
-        console.log("collision list for g: ", collisionsFor(gEvent, layout));
-        console.log(aEvent);
-        console.log(bEvent);
-        console.log(cEvent);
-        console.log(dEvent);
-        console.log(eEvent);
-        console.log(fEvent);
-        console.log(gEvent);
+        expect(aEvent.width).toEqual(200);
+        expect(bEvent.width).toEqual(200);
+        expect(cEvent.width).toEqual(200);
+        expect(dEvent.width).toEqual(200);
+        expect(eEvent.width).toEqual(200);
+        expect(fEvent.width).toEqual(200);
+        expect(gEvent.width).toEqual(600);
         expect(aEvent.left).toEqual(0);
         expect(bEvent.left).toEqual(200);
         expect(cEvent.left).toEqual(400);
@@ -233,7 +226,7 @@
           return expect(widthForIndexInCollisionList(1, [nineToEleven, tenToNoon])).toEqual(300);
         });
       });
-      describe("leftPositionForIndexInCollisionList", function() {
+      return describe("leftPositionForIndexInCollisionList", function() {
         it("should be a function", function() {
           return expect(leftPositionForIndexInCollisionList).toBeDefined();
         });
@@ -250,21 +243,6 @@
           expect(leftPositionForIndexInCollisionList(0, [a, b, c])).toEqual(0);
           expect(leftPositionForIndexInCollisionList(1, [a, b, c])).toEqual(200);
           return expect(leftPositionForIndexInCollisionList(2, [a, b, c])).toEqual(400);
-        });
-      });
-      return describe("normalizedCollisionList", function() {
-        it("should be a function", function() {
-          return expect(normalizedCollisionList).toBeDefined();
-        });
-        return it("should return a list where all collide with each other, anchored by the earliest event", function() {
-          var normalizedList;
-          normalizedList = normalizedCollisionList([a, d, f, b, e, c]);
-          expect(normalizedList.length).toEqual(3);
-          expect(normalizedList).toContain(a);
-          expect(normalizedList).toContain(b);
-          expect(normalizedList).toContain(c);
-          expect(normalizedList).toNotContain(d);
-          return expect(normalizedList).toNotContain(f);
         });
       });
     });

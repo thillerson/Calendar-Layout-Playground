@@ -26,16 +26,16 @@ window.layOutDay = (events) ->
   calendarEvents = (new CalendarEvent(event) for event in events)
   for calendarEvent in calendarEvents
     do (calendarEvent, calendarEvents) ->
-      collisionList = collisionsFor calendarEvent, calendarEvents
-      collisionList.push calendarEvent if collisionList.length == 0
-      sizeCollisionList collisionList
+      collisionList = ( collisionsFor calendarEvent, calendarEvents )
+      normalizedList = normalizedCollisionList( _.union(calendarEvent, collisionList) )
+      # OMG - Side effects!
+      sizeCollisionList normalizedList
   calendarEvents
 
 window.sizeCollisionList = (collisionList) ->
   sortedList = _.sortBy collisionList, (item) -> item.start
   for item, index in sortedList
     do (item, index, sortedList) ->
-      # OMG - Side effects!
       item.left = leftPositionForIndexInCollisionList index, sortedList
       item.width = widthForIndexInCollisionList index, sortedList
 
@@ -54,10 +54,3 @@ window.collisionsFor = (calendarEvent, calendarEvents) ->
 
   collisions
 
-window.normalizedCollisionList = (collisionList) ->
-  sortedList = _.sortBy collisionList, (item) -> item.start
-  # current strategy - reject any that do not collide with the earliest item
-  # excluding itself.
-  earliest = _.first(sortedList)
-  normalizedList = _.reject( sortedList, (item) -> not item.collidesWith earliest )
-  _.flatten [ earliest, normalizedList ]
