@@ -31,14 +31,22 @@ describe "layout problem", ->
       thirteenToFifteen
     ]
 
-    a = new CalendarEvent( id : "a", start : 0,  end : 120)
-    b = new CalendarEvent( id : "b", start : 15,  end : 135)
-    c = new CalendarEvent( id : "c", start : 30,  end : 270)
-    d = new CalendarEvent( id : "d", start : 120,  end : 240)
-    e = new CalendarEvent( id : "e", start : 150,  end : 250)
-    f = new CalendarEvent( id : "f", start : 240,  end : 360)
-    g = new CalendarEvent( id : "g", start : 700,  end : 720)
+    aObject = id : "a", start : 0,  end : 120
+    bObject = id : "b", start : 15,  end : 135
+    cObject = id : "c", start : 30,  end : 270
+    dObject = id : "d", start : 120,  end : 240
+    eObject = id : "e", start : 150,  end : 250
+    fObject = id : "f", start : 240,  end : 360
+    gObject = id : "g", start : 700,  end : 720
+    a = new CalendarEvent(aObject)
+    b = new CalendarEvent(bObject)
+    c = new CalendarEvent(cObject)
+    d = new CalendarEvent(dObject)
+    e = new CalendarEvent(eObject)
+    f = new CalendarEvent(fObject)
+    g = new CalendarEvent(gObject)
     # randomizing the order for fun
+    deepEventObjects = [ fObject, cObject, eObject, aObject, dObject, gObject, bObject ]
     deepEventList = [ e, a, b, f, d, c, g ]
 
   describe "CalendarEvent", ->
@@ -96,14 +104,35 @@ describe "layout problem", ->
       expect(event.width).toEqual 600 for event in layout
 
     xit "should lay out the example problem set (with letters) as expected", ->
-      layOutDay deepEventList
-      expect( a.left ).toEqual 0
-      expect( b.left ).toEqual 200
-      expect( c.left ).toEqual 400
-      expect( d.left ).toEqual 0
-      expect( e.left ).toEqual 200
-      expect( f.left ).toEqual 0
-      expect( g.left ).toEqual 0
+      layout = layOutDay deepEventList
+      aEvent = _.find(layout, (item) -> item.id == "a")
+      bEvent = _.find(layout, (item) -> item.id == "b")
+      cEvent = _.find(layout, (item) -> item.id == "c")
+      dEvent = _.find(layout, (item) -> item.id == "d")
+      eEvent = _.find(layout, (item) -> item.id == "e")
+      fEvent = _.find(layout, (item) -> item.id == "f")
+      gEvent = _.find(layout, (item) -> item.id == "g")
+      console.log("collision list for a: ", collisionsFor(aEvent, layout))
+      console.log("collision list for b: ", collisionsFor(bEvent, layout))
+      console.log("collision list for c: ", collisionsFor(cEvent, layout))
+      console.log("collision list for d: ", collisionsFor(dEvent, layout))
+      console.log("collision list for e: ", collisionsFor(eEvent, layout))
+      console.log("collision list for f: ", collisionsFor(fEvent, layout))
+      console.log("collision list for g: ", collisionsFor(gEvent, layout))
+      console.log(aEvent)
+      console.log(bEvent)
+      console.log(cEvent)
+      console.log(dEvent)
+      console.log(eEvent)
+      console.log(fEvent)
+      console.log(gEvent)
+      expect( aEvent.left ).toEqual 0
+      expect( bEvent.left ).toEqual 200
+      expect( cEvent.left ).toEqual 400
+      expect( dEvent.left ).toEqual 0
+      expect( eEvent.left ).toEqual 200
+      expect( fEvent.left ).toEqual 0
+      expect( gEvent.left ).toEqual 0
 
   describe "collisionsFor", ->
 

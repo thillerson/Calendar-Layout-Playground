@@ -12,6 +12,7 @@
     tenToNoon = null;
     thirteenToFifteen = null;
     beforeEach(function() {
+      var aObject, bObject, cObject, dObject, deepEventObjects, eObject, fObject, gObject;
       nineToElevenObject = {
         id: 1,
         start: 60,
@@ -32,41 +33,49 @@
       tenToNoon = new CalendarEvent(tenToNoonObject);
       thirteenToFifteen = new CalendarEvent(thirteenToFifteenObject);
       calendarEvents = [tenToNoon, nineToEleven, thirteenToFifteen];
-      a = new CalendarEvent({
+      aObject = {
         id: "a",
         start: 0,
         end: 120
-      });
-      b = new CalendarEvent({
+      };
+      bObject = {
         id: "b",
         start: 15,
         end: 135
-      });
-      c = new CalendarEvent({
+      };
+      cObject = {
         id: "c",
         start: 30,
         end: 270
-      });
-      d = new CalendarEvent({
+      };
+      dObject = {
         id: "d",
         start: 120,
         end: 240
-      });
-      e = new CalendarEvent({
+      };
+      eObject = {
         id: "e",
         start: 150,
         end: 250
-      });
-      f = new CalendarEvent({
+      };
+      fObject = {
         id: "f",
         start: 240,
         end: 360
-      });
-      g = new CalendarEvent({
+      };
+      gObject = {
         id: "g",
         start: 700,
         end: 720
-      });
+      };
+      a = new CalendarEvent(aObject);
+      b = new CalendarEvent(bObject);
+      c = new CalendarEvent(cObject);
+      d = new CalendarEvent(dObject);
+      e = new CalendarEvent(eObject);
+      f = new CalendarEvent(fObject);
+      g = new CalendarEvent(gObject);
+      deepEventObjects = [fObject, cObject, eObject, aObject, dObject, gObject, bObject];
       return deepEventList = [e, a, b, f, d, c, g];
     });
     describe("CalendarEvent", function() {
@@ -134,14 +143,50 @@
         return _results;
       });
       return xit("should lay out the example problem set (with letters) as expected", function() {
-        layOutDay(deepEventList);
-        expect(a.left).toEqual(0);
-        expect(b.left).toEqual(200);
-        expect(c.left).toEqual(400);
-        expect(d.left).toEqual(0);
-        expect(e.left).toEqual(200);
-        expect(f.left).toEqual(0);
-        return expect(g.left).toEqual(0);
+        var aEvent, bEvent, cEvent, dEvent, eEvent, fEvent, gEvent, layout;
+        layout = layOutDay(deepEventList);
+        aEvent = _.find(layout, function(item) {
+          return item.id === "a";
+        });
+        bEvent = _.find(layout, function(item) {
+          return item.id === "b";
+        });
+        cEvent = _.find(layout, function(item) {
+          return item.id === "c";
+        });
+        dEvent = _.find(layout, function(item) {
+          return item.id === "d";
+        });
+        eEvent = _.find(layout, function(item) {
+          return item.id === "e";
+        });
+        fEvent = _.find(layout, function(item) {
+          return item.id === "f";
+        });
+        gEvent = _.find(layout, function(item) {
+          return item.id === "g";
+        });
+        console.log("collision list for a: ", collisionsFor(aEvent, layout));
+        console.log("collision list for b: ", collisionsFor(bEvent, layout));
+        console.log("collision list for c: ", collisionsFor(cEvent, layout));
+        console.log("collision list for d: ", collisionsFor(dEvent, layout));
+        console.log("collision list for e: ", collisionsFor(eEvent, layout));
+        console.log("collision list for f: ", collisionsFor(fEvent, layout));
+        console.log("collision list for g: ", collisionsFor(gEvent, layout));
+        console.log(aEvent);
+        console.log(bEvent);
+        console.log(cEvent);
+        console.log(dEvent);
+        console.log(eEvent);
+        console.log(fEvent);
+        console.log(gEvent);
+        expect(aEvent.left).toEqual(0);
+        expect(bEvent.left).toEqual(200);
+        expect(cEvent.left).toEqual(400);
+        expect(dEvent.left).toEqual(0);
+        expect(eEvent.left).toEqual(200);
+        expect(fEvent.left).toEqual(0);
+        return expect(gEvent.left).toEqual(0);
       });
     });
     return describe("collisionsFor", function() {
@@ -188,7 +233,7 @@
           return expect(widthForIndexInCollisionList(1, [nineToEleven, tenToNoon])).toEqual(300);
         });
       });
-      return describe("leftPositionForIndexInCollisionList", function() {
+      describe("leftPositionForIndexInCollisionList", function() {
         it("should be a function", function() {
           return expect(leftPositionForIndexInCollisionList).toBeDefined();
         });
