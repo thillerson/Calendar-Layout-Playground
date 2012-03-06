@@ -87,23 +87,20 @@ describe "layout problem", ->
     it "should not collide with itself", ->
       expect( nineToEleven.collidesWith nineToEleven ).toBeFalsy()
 
-  xdescribe "layOutDay", ->
+  describe "layOutDay", ->
 
     it "should be a function", ->
       expect( layOutDay ).toBeDefined()
       expect( layOutDay instanceof Function ).toBeTruthy()
 
-    it "should return an array", ->
-      expect( layOutDay([]) instanceof Array ).toBeTruthy()
-
     it "should return as many events as it was given", ->
       expect( layOutDay(events).length ).toEqual events.length
 
-    xit "should set non-colliding event widths to 600", ->
+    it "should set non-colliding event widths to 600", ->
       layout = layOutDay( [ thirteenToFifteenObject ] )
       expect(event.width).toEqual 600 for event in layout
 
-    xit "should lay out the example problem set (with letters) as expected", ->
+    it "should lay out the example problem set (with letters) as expected", ->
       layout = layOutDay deepEventList
       aEvent = _.find(layout, (item) -> item.id == "a")
       bEvent = _.find(layout, (item) -> item.id == "b")
@@ -141,53 +138,52 @@ describe "layout problem", ->
     it "should return all collisions if there are any", ->
       expect( collisionsFor( nineToEleven, calendarEvents ).length ).toEqual 1
 
-    describe "sizeCollisionList", ->
+  describe "sizeCollisionList", ->
 
-      it "should be a function", ->
-        expect( sizeCollisionList ).toBeDefined()
+    beforeEach -> tenToNoon.column = 1
 
-      it "should size a list of one element as expected", ->
-        sizeCollisionList [ nineToEleven ]
-        expect( nineToEleven.left ).toEqual 0
-        expect( nineToEleven.width ).toEqual 600
+    it "should be a function", ->
+      expect( sizeCollisionList ).toBeDefined()
 
-      it "should size a list of two elements as expected", ->
-        sizeCollisionList [ nineToEleven, tenToNoon ]
-        expect( nineToEleven.left ).toEqual 0
-        expect( nineToEleven.width ).toEqual 300
-        expect( tenToNoon.left ).toEqual 300
-        expect( tenToNoon.width ).toEqual 300
+    it "should size a list of one element as expected", ->
+      sizeCollisionList [ nineToEleven ]
+      expect( nineToEleven.left ).toEqual 0
+      expect( nineToEleven.width ).toEqual 600
 
-    describe "widthForIndexInCollisionList", ->
+    it "should size a list of two elements as expected", ->
+      sizeCollisionList [ nineToEleven, tenToNoon ]
+      expect( nineToEleven.left ).toEqual 0
+      expect( nineToEleven.width ).toEqual 300
+      expect( tenToNoon.left ).toEqual 300
+      expect( tenToNoon.width ).toEqual 300
 
-      it "should be a function", ->
-        expect( widthForIndexInCollisionList ).toBeDefined()
+  describe "widthForColumnGivenMaxColumn", ->
 
-      it "should return 600 for a list with one element", ->
-        expect( widthForIndexInCollisionList(0, [ nineToEleven ]) ).toEqual 600
+    it "should be a function", ->
+      expect( widthForColumnGivenMaxColumn ).toBeDefined()
 
-      it "should return 300 for the first item in a list with two elements", ->
-        expect( widthForIndexInCollisionList(0, [ nineToEleven, tenToNoon ]) ).toEqual 300
+    it "should return 600 for a list with one element", ->
+      expect( widthForColumnGivenMaxColumn(0) ).toEqual 600
 
-      it "should return 300 for the last item in a list with two elements", ->
-        expect( widthForIndexInCollisionList(1, [ nineToEleven, tenToNoon ]) ).toEqual 300
+    it "should return 300 for the first item in a list with two elements", ->
+      expect( widthForColumnGivenMaxColumn(1) ).toEqual 300
 
-    describe "leftPositionForIndexInCollisionList", ->
+  describe "leftPositionForColumnGivenMaxColumn", ->
 
-      it "should be a function", ->
-        expect( leftPositionForIndexInCollisionList ).toBeDefined()
+    it "should be a function", ->
+      expect( leftPositionForColumnGivenMaxColumn ).toBeDefined()
 
-      it "should return 0 for a list with one element", ->
-        expect( leftPositionForIndexInCollisionList(0, [ nineToEleven ]) ).toEqual 0
+    it "should return 0 for a list with one element", ->
+      expect( leftPositionForColumnGivenMaxColumn(0, 0) ).toEqual 0
 
-      it "should return 0 for the first item in a list with two elements", ->
-        expect( leftPositionForIndexInCollisionList(0, [ nineToEleven, tenToNoon ]) ).toEqual 0
+    it "should return 0 for the first item in a list with two elements", ->
+      expect( leftPositionForColumnGivenMaxColumn(0, 1) ).toEqual 0
 
-      it "should return 300 for the second item in a list with two elements", ->
-        expect( leftPositionForIndexInCollisionList(1, [ nineToEleven, tenToNoon ]) ).toEqual 300
+    it "should return 300 for the second item in a list with two elements", ->
+      expect( leftPositionForColumnGivenMaxColumn(1, 1) ).toEqual 300
 
-      it "should return expected values for a three item array", ->
-        expect( leftPositionForIndexInCollisionList(0, [ a, b, c ]) ).toEqual 0
-        expect( leftPositionForIndexInCollisionList(1, [ a, b, c ]) ).toEqual 200
-        expect( leftPositionForIndexInCollisionList(2, [ a, b, c ]) ).toEqual 400
+    it "should return expected values for a three item array", ->
+      expect( leftPositionForColumnGivenMaxColumn(0, 2) ).toEqual 0
+      expect( leftPositionForColumnGivenMaxColumn(1, 2) ).toEqual 200
+      expect( leftPositionForColumnGivenMaxColumn(2, 2) ).toEqual 400
 

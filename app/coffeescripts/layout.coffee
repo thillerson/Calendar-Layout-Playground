@@ -9,6 +9,7 @@ class CalendarEvent
     @top = @start
     @left = 0
     @width = 0
+    @column = 0
 
   collidesWith: (another) ->
     return false if another == @
@@ -24,26 +25,32 @@ window.CalendarEvent = CalendarEvent
 
 window.layOutDay = (events) ->
   calendarEvents = (new CalendarEvent(event) for event in events)
-  for calendarEvent in calendarEvents
-    do (calendarEvent, calendarEvents) ->
-      collisionList = ( collisionsFor calendarEvent, calendarEvents )
-      normalizedList = normalizedCollisionList( _.union(calendarEvent, collisionList) )
-      # OMG - Side effects!
-      sizeCollisionList normalizedList
+  eventsToProcess = _.sortBy calendarEvents, (event) -> event.start
+  for calendarEvent in eventsToProcess
+    continue unless calendarEvent
+    do (calendarEvent, eventsToProcess, calendarEvents) ->
+      collisionList = ( collisionsFor calendarEvent, calendarEvents)
+      (event.column = index + 1 unless event.column > 0) for event, index in collisionList
+      sizeCollisionList _.union calendarEvent, collisionList
+      console.log "collisionList for #{calendarEvent.id}", collisionList
+      for processedEvent in collisionList
+        do (processedEvent, collisionList) ->
+          index = _.indexOf eventsToProcess, processedEvent
+          eventsToProcess.splice(index, 1) if index != -1
   calendarEvents
 
 window.sizeCollisionList = (collisionList) ->
-  sortedList = _.sortBy collisionList, (item) -> item.start
-  for item, index in sortedList
-    do (item, index, sortedList) ->
-      item.left = leftPositionForIndexInCollisionList index, sortedList
-      item.width = widthForIndexInCollisionList index, sortedList
+  columns = (_.max collisionList, (item) -> item.column).column
+  for item in collisionList
+    do (item) ->
+      item.left = leftPositionForColumnGivenMaxColumn item.column, columns
+      item.width = widthForColumnGivenMaxColumn columns
 
-window.widthForIndexInCollisionList = (index, collisionList) ->
-  FULL_WIDTH / collisionList.length
+window.widthForColumnGivenMaxColumn = (maxColumn) ->
+  FULL_WIDTH / (maxColumn + 1)
 
-window.leftPositionForIndexInCollisionList = (index, collisionList) ->
-  ( FULL_WIDTH / collisionList.length ) * index
+window.leftPositionForColumnGivenMaxColumn = (column, maxColumn) ->
+  ( FULL_WIDTH / (maxColumn + 1) ) * column
 
 window.collisionsFor = (calendarEvent, calendarEvents) ->
   collisions = []
@@ -53,4 +60,3 @@ window.collisionsFor = (calendarEvent, calendarEvents) ->
       collisions
 
   collisions
-

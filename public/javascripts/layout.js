@@ -13,6 +13,7 @@
       this.top = this.start;
       this.left = 0;
       this.width = 0;
+      this.column = 0;
     }
 
     CalendarEvent.prototype.collidesWith = function(another) {
@@ -36,7 +37,7 @@
   window.CalendarEvent = CalendarEvent;
 
   window.layOutDay = function(events) {
-    var calendarEvent, calendarEvents, event, _fn, _i, _len;
+    var calendarEvent, calendarEvents, event, eventsToProcess, _fn, _i, _len;
     calendarEvents = (function() {
       var _i, _len, _results;
       _results = [];
@@ -46,41 +47,58 @@
       }
       return _results;
     })();
-    _fn = function(calendarEvent, calendarEvents) {
-      var collisionList, normalizedList;
+    eventsToProcess = _.sortBy(calendarEvents, function(event) {
+      return event.start;
+    });
+    _fn = function(calendarEvent, eventsToProcess, calendarEvents) {
+      var collisionList, event, index, processedEvent, _j, _len2, _len3, _results;
       collisionList = collisionsFor(calendarEvent, calendarEvents);
-      normalizedList = normalizedCollisionList(_.union(calendarEvent, collisionList));
-      return sizeCollisionList(normalizedList);
+      for (index = 0, _len2 = collisionList.length; index < _len2; index++) {
+        event = collisionList[index];
+        if (!(event.column > 0)) event.column = index + 1;
+      }
+      sizeCollisionList(_.union(calendarEvent, collisionList));
+      console.log("collisionList for " + calendarEvent.id, collisionList);
+      _results = [];
+      for (_j = 0, _len3 = collisionList.length; _j < _len3; _j++) {
+        processedEvent = collisionList[_j];
+        _results.push((function(processedEvent, collisionList) {
+          index = _.indexOf(eventsToProcess, processedEvent);
+          if (index !== -1) return eventsToProcess.splice(index, 1);
+        })(processedEvent, collisionList));
+      }
+      return _results;
     };
-    for (_i = 0, _len = calendarEvents.length; _i < _len; _i++) {
-      calendarEvent = calendarEvents[_i];
-      _fn(calendarEvent, calendarEvents);
+    for (_i = 0, _len = eventsToProcess.length; _i < _len; _i++) {
+      calendarEvent = eventsToProcess[_i];
+      if (!calendarEvent) continue;
+      _fn(calendarEvent, eventsToProcess, calendarEvents);
     }
     return calendarEvents;
   };
 
   window.sizeCollisionList = function(collisionList) {
-    var index, item, sortedList, _len, _results;
-    sortedList = _.sortBy(collisionList, function(item) {
-      return item.start;
-    });
+    var columns, item, _i, _len, _results;
+    columns = (_.max(collisionList, function(item) {
+      return item.column;
+    })).column;
     _results = [];
-    for (index = 0, _len = sortedList.length; index < _len; index++) {
-      item = sortedList[index];
-      _results.push((function(item, index, sortedList) {
-        item.left = leftPositionForIndexInCollisionList(index, sortedList);
-        return item.width = widthForIndexInCollisionList(index, sortedList);
-      })(item, index, sortedList));
+    for (_i = 0, _len = collisionList.length; _i < _len; _i++) {
+      item = collisionList[_i];
+      _results.push((function(item) {
+        item.left = leftPositionForColumnGivenMaxColumn(item.column, columns);
+        return item.width = widthForColumnGivenMaxColumn(columns);
+      })(item));
     }
     return _results;
   };
 
-  window.widthForIndexInCollisionList = function(index, collisionList) {
-    return FULL_WIDTH / collisionList.length;
+  window.widthForColumnGivenMaxColumn = function(maxColumn) {
+    return FULL_WIDTH / (maxColumn + 1);
   };
 
-  window.leftPositionForIndexInCollisionList = function(index, collisionList) {
-    return (FULL_WIDTH / collisionList.length) * index;
+  window.leftPositionForColumnGivenMaxColumn = function(column, maxColumn) {
+    return (FULL_WIDTH / (maxColumn + 1)) * column;
   };
 
   window.collisionsFor = function(calendarEvent, calendarEvents) {
