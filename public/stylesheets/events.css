@@ -1,0 +1,16 @@
+.day {
+  background-color : #e7e7e7;
+  width : 610px;
+  height : 720px;
+  border-width : medium;
+  padding : 10px;
+  position : relative;
+}
+
+.event {
+  background-color : #fff;
+  position : absolute;
+  margin : 10px;
+}
+
+

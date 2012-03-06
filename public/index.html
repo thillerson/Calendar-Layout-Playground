@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Events</title>
+		<link rel="stylesheet" href="stylesheets/events.css" />
+		<script type="text/javascript" src="javascripts/vendor/underscore-min.js"></script>
+		<script type="text/javascript" src="javascripts/vendor/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="javascripts/layout.js"></script>
+    <script id="eventTemplate" type="text/template">
+      <div id="<%= id %>" class="event" style="width : <%= width %>px; height : <%= height %>px; left : <%= left %>px; top : <%= top%>px;">
+        <h1>Sample Item</h1>
+        <h2>Sample Location</h2>
+      </div>
+    </script>
+
+    <script type="text/javascript">
+      var events = [
+      { id : 1, start : 30, end : 150},
+      { id : 2, start : 540, end : 600},
+      { id : 3, start : 560, end : 620},
+      { id : 4, start : 610, end : 670}
+      ];
+
+      $(document).ready( function() {
+        var eventsToLayout = layOutDay(events);
+        _.each(eventsToLayout, function(event) {
+          eventHtml = _.template($("#eventTemplate").html())(event);
+          console.log(eventHtml)
+          $(".day").append(eventHtml);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="day"></div>
+  </body>
+</html>
