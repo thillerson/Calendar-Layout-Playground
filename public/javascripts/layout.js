@@ -59,7 +59,6 @@
         if (!(event.column > 0)) event.column = index + 1;
       }
       sizeCollisionList(_.union(calendarEvent, collisionList));
-      console.log("collisionList for " + calendarEvent.id, collisionList);
       _results = [];
       for (_j = 0, _len3 = collisionList.length; _j < _len3; _j++) {
         processedEvent = collisionList[_j];

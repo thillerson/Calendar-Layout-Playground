@@ -6,13 +6,24 @@
 		<link rel="stylesheet" href="stylesheets/events.css" />
 		<script type="text/javascript" src="javascripts/vendor/underscore-min.js"></script>
 		<script type="text/javascript" src="javascripts/vendor/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="javascripts/vendor/moment.min.js"></script>
 		<script type="text/javascript" src="javascripts/layout.js"></script>
+		<script type="text/javascript" src="javascripts/times.js"></script>
     <script id="eventTemplate" type="text/template">
       <div id="<%= id %>" class="event" style="width : <%= width %>px; height : <%= height %>px; left : <%= left %>px; top : <%= top%>px;">
         <div class="little-bar-fella"></div>
         <h1>Sample Item</h1>
         <h2>Sample Location</h2>
       </div>
+    </script>
+    <script id="halfHourLabelTemplate" type="text/template">
+      <%= label %> <%= meridian %>
+    </script>
+    <script id="hourLabelTemplate" type="text/template">
+      <h1><%= label %></h1> <%= meridian %>
+    </script>
+    <script id="halfHourContainerTemplate" type="text/template">
+      <div class="hour" style="top : <%= top%>px;"><%= label %></div>
     </script>
 
     <script type="text/javascript">
@@ -24,6 +35,7 @@
       ];
 
       $(document).ready( function() {
+        buildTimes();
         var eventsToLayout = layOutDay(events);
         _.each(eventsToLayout, function(event) {
           eventHtml = _.template($("#eventTemplate").html())(event);

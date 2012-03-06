@@ -10,12 +10,14 @@ body {
 
 .day {
   background-color : #e7e7e7;
-  width : 610px;
+  width : 620px;
   height : 720px;
   border-width : medium;
   padding : 10px 0 0 10px;
-  margin : 20px 0 0 0;
+  margin : 0;
   position : relative;
+  left : 60px;
+  top : 20px;
 }
 
 .event {
@@ -46,3 +48,25 @@ body {
   position : absolute;
   display : inline;
 }
+
+.hour {
+  height : 30px;
+  width : 60px;
+  color: #999;
+  font-size : .8em;
+  padding : 0px;
+  margin : 7px 0 0 0;
+  text-align : right;
+  position : absolute;
+  display : table-cell;
+  vertical-align : middle;
+}
+
+.hour h1 {
+  color: #999;
+  font-size : 1.6em;
+  padding : 0px;
+  margin : 0px;
+  display : inline;
+}
+

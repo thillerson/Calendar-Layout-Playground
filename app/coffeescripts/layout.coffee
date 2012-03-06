@@ -33,7 +33,6 @@ window.layOutDay = (events) ->
       collisionList = ( collisionsFor calendarEvent, calendarEvents)
       (event.column = index + 1 unless event.column > 0) for event, index in collisionList
       sizeCollisionList _.union calendarEvent, collisionList
-      console.log "collisionList for #{calendarEvent.id}", collisionList
       for processedEvent in collisionList
         do (processedEvent, collisionList) ->
           index = _.indexOf eventsToProcess, processedEvent
