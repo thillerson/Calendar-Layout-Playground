@@ -7,6 +7,7 @@ class CalendarEvent
     @start = @eventObject.start
     @end = @eventObject.end
     @top = @start
+    @height = @end - @start
     @left = 0
     @width = 0
     @column = 0

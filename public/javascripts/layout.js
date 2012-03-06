@@ -11,6 +11,7 @@
       this.start = this.eventObject.start;
       this.end = this.eventObject.end;
       this.top = this.start;
+      this.height = this.end - this.start;
       this.left = 0;
       this.width = 0;
       this.column = 0;
