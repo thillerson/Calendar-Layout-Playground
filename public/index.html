@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="javascripts/layout.js"></script>
     <script id="eventTemplate" type="text/template">
       <div id="<%= id %>" class="event" style="width : <%= width %>px; height : <%= height %>px; left : <%= left %>px; top : <%= top%>px;">
+        <div class="little-bar-fella"></div>
         <h1>Sample Item</h1>
         <h2>Sample Location</h2>
       </div>
@@ -16,17 +17,16 @@
 
     <script type="text/javascript">
       var events = [
-      { id : 1, start : 30, end : 150},
-      { id : 2, start : 540, end : 600},
-      { id : 3, start : 560, end : 620},
-      { id : 4, start : 610, end : 670}
+        { id : 1, start : 30, end : 150},
+        { id : 2, start : 540, end : 600},
+        { id : 3, start : 560, end : 620},
+        { id : 4, start : 610, end : 670}
       ];
 
       $(document).ready( function() {
         var eventsToLayout = layOutDay(events);
         _.each(eventsToLayout, function(event) {
           eventHtml = _.template($("#eventTemplate").html())(event);
-          console.log(eventHtml)
           $(".day").append(eventHtml);
         });
       });

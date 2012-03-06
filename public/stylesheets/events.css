@@ -1,16 +1,48 @@
+body {
+  background: white;
+  font-size: 11px;
+  font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
 .day {
   background-color : #e7e7e7;
   width : 610px;
   height : 720px;
   border-width : medium;
-  padding : 10px;
+  padding : 10px 0 0 10px;
+  margin : 20px 0 0 0;
   position : relative;
 }
 
 .event {
   background-color : #fff;
   position : absolute;
-  margin : 10px;
+  margin-left : 10px;
 }
 
+.event h1 {
+  color : #3B5898;
+  font-size : 1.2em;
+  padding : 6px 0px 0px 10px;
+  margin : 0px;
+}
 
+.event h2 {
+  color: #999;
+  font-size : .8em;
+  font-weight : normal;
+  padding : 0px 0px 0px 10px;
+  margin : 0px;
+}
+
+.little-bar-fella {
+  background-color : #3B5898;
+  width : 4px;
+  height : 100%;
+  position : absolute;
+  display : inline;
+}
